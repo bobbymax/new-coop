@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../../assets/images/logo/logo.png";
 import logoMini from "../../../assets/images/logo/logo-small.png";
+import { Link } from "react-router-dom";
 
 const Brand = ({ handleToggle }) => {
   return (
@@ -16,12 +17,12 @@ const Brand = ({ handleToggle }) => {
         </button>
       </div>
       <div>
-        <a className="navbar-brand brand-logo" href="index.html">
+        <Link className="navbar-brand brand-logo" to="/">
           <img src={logo} alt="logo" />
-        </a>
-        <a className="navbar-brand brand-logo-mini" href="index.html">
+        </Link>
+        <Link className="navbar-brand brand-logo-mini" to="/">
           <img src={logoMini} alt="logo" />
-        </a>
+        </Link>
       </div>
     </div>
   );
