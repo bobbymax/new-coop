@@ -6,7 +6,7 @@ import { navigation } from "../../../routes/menu";
 import slugify from "slugify";
 import "./custom-styles.css";
 
-const Sidebar = ({ auth }) => {
+const Sidebar = ({ auth, offCanvas }) => {
   const location = useLocation();
 
   const runToArray = (data) => {
@@ -18,7 +18,10 @@ const Sidebar = ({ auth }) => {
   };
 
   return (
-    <nav className="sidebar sidebar-offcanvas" id="sidebar">
+    <nav
+      className={`sidebar sidebar-offcanvas ${offCanvas ? "active" : ""}`}
+      id="sidebar"
+    >
       <ul className="nav">
         {navigation.map((nav, i) => {
           if (

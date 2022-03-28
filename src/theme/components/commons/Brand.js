@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../../assets/images/logo/logo.png";
 import logoMini from "../../../assets/images/logo/logo-small.png";
 
-const Brand = () => {
+const Brand = ({ handleToggle }) => {
   return (
     <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
       <div className="me-3">
@@ -10,6 +10,7 @@ const Brand = () => {
           className="navbar-toggler navbar-toggler align-self-center"
           type="button"
           data-bs-toggle="minimize"
+          onClick={() => handleToggle()}
         >
           <span className="icon-menu" />
         </button>

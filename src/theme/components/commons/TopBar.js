@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import avatar from "../../../assets/images/faces/avatar.png";
 
-const TopBar = ({ auth, logOut }) => {
+const TopBar = ({ auth, logOut, handleOffCanvas }) => {
   return (
     <div className="navbar-menu-wrapper d-flex align-items-top">
       <ul className="navbar-nav ms-auto">
@@ -65,6 +65,7 @@ const TopBar = ({ auth, logOut }) => {
         className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
         type="button"
         data-bs-toggle="offcanvas"
+        onClick={() => handleOffCanvas()}
       >
         <span className="mdi mdi-menu" />
       </button>
