@@ -96,7 +96,7 @@ export const navigation = [
         icon: "mdi-dns",
         type: "link",
         children: [],
-        roles: ["super-administrator", "administrator"],
+        roles: ["super-administrator", "administrator", "general-secretary"],
       },
       {
         title: "Members",
@@ -107,7 +107,7 @@ export const navigation = [
         roles: ["super-administrator", "administrator"],
       },
     ],
-    roles: ["super-administrator", "administrator"],
+    roles: ["super-administrator", "administrator", "general-secretary"],
   },
   {
     title: "Finance Control",

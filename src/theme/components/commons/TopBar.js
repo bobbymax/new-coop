@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
-import avatar from "../../../assets/images/faces/face8.jpg";
+import avatar from "../../../assets/images/faces/avatar.png";
 
 const TopBar = ({ auth, logOut }) => {
   return (
@@ -43,16 +43,17 @@ const TopBar = ({ auth, logOut }) => {
                 className="img-md rounded-circle"
                 src={avatar}
                 alt="Profile image"
+                style={{ width: "50%" }}
               />
               <p className="mb-1 mt-3 font-weight-semibold">
                 {auth && auth.firstname + " " + auth.surname}
               </p>
               <p className="fw-light text-muted mb-0">{auth && auth.email}</p>
             </div>
-            <a className="dropdown-item">
+            {/* <a className="dropdown-item">
               <i className="dropdown-item-icon mdi mdi-account-outline text-primary me-2" />
               My Profile
-            </a>
+            </a> */}
             <Link to="#" className="dropdown-item" onClick={logOut}>
               <i className="dropdown-item-icon mdi mdi-power text-primary me-2" />
               Sign Out

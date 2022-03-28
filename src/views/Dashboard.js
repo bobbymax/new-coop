@@ -3,14 +3,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { money } from "../services/helpers/functions";
 import { batchRequests, collection } from "../services/requests/controllers";
 import AuthDashboardCard from "./dashboards/AuthDashboardCard";
+import "./modules/requests/loan.css";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth.value.user);
   const budgetYear = useSelector((state) => state.config.value.budget_year);
 
   const initialState = {
+    eligibility: 0,
     availableBalance: 0,
     currentContribution: 0,
     currentLoan: 0,
@@ -30,6 +33,11 @@ const Dashboard = () => {
         const membersData = collection("members");
         const fundsData = collection("funds");
         const walletsData = collection("wallets");
+
+        const eligibility =
+          auth.activeLoans == 0
+            ? auth.wallet && parseFloat(auth.wallet.current) * 2
+            : 0;
 
         batchRequests([
           contributionData,
@@ -76,6 +84,7 @@ const Dashboard = () => {
 
             setState({
               ...state,
+              eligibility: parseFloat(eligibility),
               availableBalance: parseFloat(auth.wallet && auth.wallet.current),
               currentContribution: parseFloat(
                 auth.contribution && parseFloat(auth.contribution.fee)
@@ -95,6 +104,16 @@ const Dashboard = () => {
 
   return (
     <>
+      <div className="row mb-5">
+        <div className="col-md-4">
+          <div className="loan-card bg-success">
+            <div className="card-body">
+              <h4 className="text-white">{`Loan Eligibility`.toUpperCase()}</h4>
+              <h2 className="text-warning">{money(state.eligibility)}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
       <AuthDashboardCard auth={auth} cardValues={state} />
     </>
   );

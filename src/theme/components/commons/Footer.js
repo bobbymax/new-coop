@@ -6,14 +6,13 @@ const Footer = () => {
     <footer className="footer">
       <div className="d-sm-flex justify-content-center justify-content-sm-between">
         <span className="text-muted text-center text-sm-left d-block d-sm-inline-block">
-          Premium
-          <a href="https://www.bootstrapdash.com/" target="_blank">
-            Bootstrap admin template
+          Built with Love by{" "}
+          <a href="https://www.raaxo.ng/" target="_blank">
+            Raaxo Synergy
           </a>
-          from BootstrapDash.
         </span>
         <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
-          Copyright © 2021. All rights reserved.
+          Copyright © 2022. All rights reserved.
         </span>
       </div>
     </footer>
