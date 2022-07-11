@@ -45,6 +45,7 @@ const Secretariate = lazy(() =>
 );
 const Decision = lazy(() => import("../views/modules/requests/Decision"));
 const Imports = lazy(() => import("../views/modules/console/Imports"));
+const Profile = lazy(() => import("../views/modules/members/Profile"));
 
 export const pages = {
   guests: [
@@ -169,6 +170,11 @@ export const pages = {
       name: "Imports",
       component: <Imports />,
       path: "/imports",
+    },
+    {
+      name: "Member Profile",
+      component: <Profile />,
+      path: "/member/profile",
     },
   ],
 };

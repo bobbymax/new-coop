@@ -61,7 +61,7 @@ const Decision = () => {
       instructions: installments,
     };
 
-    console.log(data);
+    // console.log(data);
 
     try {
       alter("loans", state.id, data)

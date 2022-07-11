@@ -36,10 +36,10 @@ const GrantLoans = () => {
     if (data.status === "pending") {
       setState({
         ...state,
-        id: data.id,
-        loan_id: data.loan_id,
-        remark: data.remark,
-        status: data.status,
+        id: data?.id,
+        loan_id: data?.loan_id,
+        remark: data?.remark ?? "",
+        status: data?.status,
       });
       setOpen(true);
     } else {

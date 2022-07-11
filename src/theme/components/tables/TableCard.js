@@ -135,7 +135,10 @@ const TableCard = ({
                         )}
                         {printFile !== undefined && (
                           <td>
-                            <button className="btn btn-xs btn-success btn-rounded">
+                            <button
+                              type="button"
+                              className="btn btn-xs btn-success btn-rounded"
+                            >
                               <Icon.Printer
                                 size={14}
                                 onClick={() => printFile(row)}

@@ -20,6 +20,7 @@ const CustomPagination = ({
     }
   }, [total, itemsPerPage]);
 
+  // eslint-disable-next-line no-unused-vars
   const paginationItems = useMemo(() => {
     const pages = [];
 
@@ -46,7 +47,7 @@ const CustomPagination = ({
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       />
-      {paginationItems}
+      {/* {paginationItems} */}
       <Pagination.Next
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

@@ -135,17 +135,16 @@ const ManageMember = () => {
                 <tbody>
                   <tr>
                     <td>
-                      Firstname: <strong>{member && member.firstname}</strong>
+                      Firstname: <strong>{member?.firstname}</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       Middlename:{" "}
                       <strong>
-                        {member &&
-                          (member.middlename !== null
-                            ? member.middlename
-                            : "NONE")}
+                        {member?.middlename !== null
+                          ? member?.middlename
+                          : "NONE"}
                       </strong>
                     </td>
                   </tr>
@@ -163,10 +162,9 @@ const ManageMember = () => {
                     <td>
                       Date Joined:{" "}
                       <strong>
-                        {member &&
-                          (member.date_joined !== null
-                            ? moment(member.date_joined).format("LL")
-                            : "NOT SET!!")}
+                        {member?.date_joined !== null
+                          ? moment(member?.date_joined).format("LL")
+                          : "NOT SET!!"}
                       </strong>
                     </td>
                   </tr>
@@ -174,7 +172,7 @@ const ManageMember = () => {
                     <td>
                       Status:{" "}
                       <strong>
-                        {member && member.status === "active"
+                        {member?.status === "active"
                           ? "VERIFIED!!"
                           : "DEACTIVATED"}
                       </strong>
@@ -214,7 +212,7 @@ const ManageMember = () => {
                   type="button"
                   className="btn btn-dark btn-block"
                   onClick={() => verifyMemberAccount()}
-                  disabled={member && member.status === "active"}
+                  disabled={member?.status === "active"}
                 >
                   VERIFY MEMBER
                 </button>
@@ -247,7 +245,7 @@ const ManageMember = () => {
             <div className="card-body">
               <BasicTable
                 columns={roleColumns}
-                rows={member && member.roles}
+                rows={member?.roles}
                 message="No Roles Added to this Member"
               />
             </div>
@@ -261,7 +259,7 @@ const ManageMember = () => {
             <div className="card-body">
               <BasicTable
                 columns={contributionColumns}
-                rows={member && member.contributions}
+                rows={member?.contributions}
                 message="No Roles Added to this Member"
                 showColumn
               />
@@ -280,7 +278,7 @@ const ManageMember = () => {
         show={modalControl.modify}
         onHide={() => setModalControl({ ...modalControl, modify: false })}
         handleModification={handleModification}
-        type={member && member.type}
+        type={member?.type}
       />
 
       <ModifyMemberContribution

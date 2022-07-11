@@ -139,18 +139,16 @@ const Loans = () => {
     if (state.amount > 0 && state.budget_head_id > 0 && auth !== null) {
       const mssgs = [];
       const budgetHeadFilter = budgetHeads.filter(
-        (budgt) => budgt && budgt.id == state.budget_head_id
+        (budgt) => budgt?.id == state.budget_head_id
       );
       const budgetHead = budgetHeadFilter[0];
 
-      const eligible =
-        auth.wallet && parseFloat(auth.wallet.available) * 2 >= state.amount;
+      const eligible = parseFloat(auth?.wallet?.current) * 2 >= state.amount;
 
       const availability =
-        (budgetHead && parseFloat(budgetHead.fund.actual_balance)) >
-        state.amount;
+        parseFloat(budgetHead?.fund?.actual_balance) > state.amount;
 
-      const limit = (budgetHead && parseFloat(budgetHead.limit)) > state.amount;
+      const limit = parseFloat(budgetHead?.limit) > state.amount;
 
       mssgs.push(
         eligible

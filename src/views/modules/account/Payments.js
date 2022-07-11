@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { collection } from "../../../services/requests/controllers";
 import TableCard from "../../../theme/components/tables/TableCard";
-// import { PDFDownloadLink } from "@react-pdf/renderer";
+import Mandate from "../exports/Mandate";
 
 const Payments = () => {
   const [batches, setBatches] = useState([]);
+  const [showMandate, setShowMandate] = useState(false);
+  const [data, setData] = useState({});
 
   const columns = [
     { key: "batch_no", label: "Code" },
@@ -14,6 +16,8 @@ const Payments = () => {
 
   const printBatchPayment = (data) => {
     console.log(data);
+    setShowMandate(true);
+    setData(data);
   };
 
   useEffect(() => {
@@ -28,21 +32,27 @@ const Payments = () => {
     }
   }, []);
 
-  console.log(batches);
-
   return (
     <>
       <div className="row">
-        {/* <PDFDownloadLink document={<Doc />} fileName="FORM">
-                {({loading}) => (loading ? 'Loading document ...' : 'Download')}
-            </PDFDownloadLink> */}
-
         <div className="col-md-12">
-          <TableCard
-            columns={columns}
-            rows={batches}
-            printFile={printBatchPayment}
-          />
+          {!showMandate ? (
+            <TableCard
+              columns={columns}
+              rows={batches}
+              printFile={printBatchPayment}
+            />
+          ) : (
+            <>
+              <Mandate
+                batch={data}
+                onClose={() => {
+                  setShowMandate(false);
+                  setData({});
+                }}
+              />
+            </>
+          )}
         </div>
       </div>
     </>

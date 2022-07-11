@@ -19,7 +19,7 @@ const TextInputField = ({
 }) => {
   return (
     <div className="form-group">
-      <label className="form-label">{label}</label>
+      {label !== "" && <label className="form-label">{label}</label>}
       {multiline === 0 ? (
         <input
           className={`form-control ${

@@ -1,0 +1,27 @@
+.account-card {
+  padding: 12px 15px;
+  background-color: #272a2a;
+  border-radius: 12px;
+  color: #ddeaeb;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+.bank__text {
+  color: #ddeaeb;
+}
+.bank__link {
+  text-decoration: none;
+  font-size: 9px;
+  padding: 5px 9px;
+  color: #272a2a;
+  background-color: #f1c40f;
+  border-radius: 10px;
+}
+.bank__link:hover {
+  background-color: #272a2a;
+  color: #f1c40f;
+}
+.bank__username {
+  color: #f1c40f;
+}

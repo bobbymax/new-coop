@@ -22,8 +22,6 @@ const Secretariate = () => {
   ];
 
   const handleLoan = (data) => {
-    // console.log(data);
-
     if (data.stage === "secretariate") {
       navigate(`/loan/${data.code}/decision`, {
         state: {

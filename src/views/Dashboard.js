@@ -35,9 +35,7 @@ const Dashboard = () => {
         const walletsData = collection("wallets");
 
         const eligibility =
-          auth.activeLoans == 0
-            ? auth.wallet && parseFloat(auth.wallet.current) * 2
-            : 0;
+          auth?.activeLoans == 0 ? parseFloat(auth?.wallet?.current) * 2 : 0;
 
         batchRequests([
           contributionData,
@@ -53,41 +51,38 @@ const Dashboard = () => {
 
             const validContributions = contributions.filter(
               (cont) =>
-                cont.current &&
-                cont.member &&
-                !cont.member.roleLabels.includes("super-administrator")
+                cont?.current &&
+                !cont?.member?.roleLabels?.includes("super-administrator")
             );
 
             const contributionSum = validContributions
-              .map((cont) => cont && parseFloat(cont.fee))
+              .map((cont) => cont && parseFloat(cont?.fee))
               .reduce((sum, previous) => sum + previous, 0);
 
             const validRegisteredMemebers = members.filter(
               (mem) =>
-                mem &&
-                mem.status === "active" &&
-                !mem.roleLabels.includes("super-administrator")
+                mem?.status === "active" &&
+                !mem?.roleLabels?.includes("super-administrator")
             );
 
             const walletsSum = wallets
-              .map((wallet) => wallet && parseFloat(wallet.current))
+              .map((wallet) => parseFloat(wallet?.current))
               .reduce((sum, previous) => sum + previous, 0);
 
             const fundSum = funds
               .map(
                 (fund) =>
-                  fund &&
-                  parseInt(fund.year) == parseInt(budgetYear) &&
-                  parseFloat(fund.approved_amount)
+                  parseInt(fund?.year) == parseInt(budgetYear) &&
+                  parseFloat(fund?.approved_amount)
               )
               .reduce((sum, previous) => sum + previous, 0);
 
             setState({
               ...state,
               eligibility: parseFloat(eligibility),
-              availableBalance: parseFloat(auth.wallet && auth.wallet.current),
+              availableBalance: parseFloat(auth?.wallet?.current),
               currentContribution: parseFloat(
-                auth.contribution && parseFloat(auth.contribution.fee)
+                parseFloat(auth?.contribution?.fee)
               ),
               registeredMembers: validRegisteredMemebers.length,
               totalMembersContributions: contributionSum,

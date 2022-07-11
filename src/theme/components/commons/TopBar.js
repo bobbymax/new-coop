@@ -46,14 +46,14 @@ const TopBar = ({ auth, logOut, handleOffCanvas }) => {
                 style={{ width: "50%" }}
               />
               <p className="mb-1 mt-3 font-weight-semibold">
-                {auth && auth.firstname + " " + auth.surname}
+                {auth?.firstname + " " + auth?.surname}
               </p>
-              <p className="fw-light text-muted mb-0">{auth && auth.email}</p>
+              <p className="fw-light text-muted mb-0">{auth?.email}</p>
             </div>
-            {/* <a className="dropdown-item">
+            <Link to="/member/profile" className="dropdown-item">
               <i className="dropdown-item-icon mdi mdi-account-outline text-primary me-2" />
               My Profile
-            </a> */}
+            </Link>
             <Link to="#" className="dropdown-item" onClick={logOut}>
               <i className="dropdown-item-icon mdi mdi-power text-primary me-2" />
               Sign Out
