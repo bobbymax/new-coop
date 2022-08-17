@@ -17,7 +17,7 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
 
   const cards = [
     {
-      title: "Available Balance",
+      title: "Available Balance [as at August, 2021]",
       figure: availableBalance,
       format: "currency",
       roles: ["member", "super-administrator"],
