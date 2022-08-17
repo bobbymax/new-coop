@@ -2,6 +2,7 @@
 import React from "react";
 import "../modules/requests/loan.css";
 import { money } from "../../services/helpers/functions";
+import "./dashboard.css";
 
 const AuthDashboardCard = ({ auth, cardValues }) => {
   const {
@@ -17,7 +18,7 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
 
   const cards = [
     {
-      title: "Available Balance [as at August, 2021]",
+      title: "Available Balance",
       figure: availableBalance,
       format: "currency",
       roles: ["member", "super-administrator"],
@@ -106,6 +107,11 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
                           ? money(card.figure)
                           : card.figure}
                       </h4>
+                      {card.format === "currency" && (
+                        <span className="updated">
+                          Update as at August, 2021
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

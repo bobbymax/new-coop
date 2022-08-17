@@ -1,0 +1,9 @@
+.updated {
+  font-size: 9px;
+  text-transform: uppercase;
+  background-color: cadetblue;
+  padding: 3px 9px;
+  border-radius: 9px;
+  color: white;
+  font-weight: 700;
+}
