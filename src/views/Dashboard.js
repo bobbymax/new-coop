@@ -145,6 +145,46 @@ const Dashboard = () => {
         )}
       </div>
       <AuthDashboardCard auth={auth} cardValues={state} />
+      <div className="row">
+        <div className="col-md-12 mt-4">
+          <h2 className="how-to">How-To Training Videos</h2>
+        </div>
+      </div>
+      <div className="row mt-4">
+        <div className="col-md-4 mb-2">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/vfsMBWp9I-Y"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div className="col-md-4 mb-2">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/CiDALaJHnLc"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div className="col-md-4 mb-2">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/c5MXM4jsvFY"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
     </>
   );
 };
