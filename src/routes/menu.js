@@ -22,6 +22,14 @@ export const navigation = [
         roles: ["member", "super-administrator"],
       },
       {
+        title: "Requests",
+        path: "/service/requests",
+        icon: "mdi-chart-arc",
+        type: "link",
+        children: [],
+        roles: ["member", "super-administrator"],
+      },
+      {
         title: "Guarantee Loans",
         path: "/grant-loans",
         icon: "mdi-check-all",

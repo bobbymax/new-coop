@@ -4,8 +4,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import { useSelector } from "react-redux";
 import Alert from "../../../services/helpers/classes/Alert";
 import { getMonthsArr, money } from "../../../services/helpers/functions";
+import authHeader from "../../../services/requests/auth.header";
 import {
   alter,
   batchRequests,
@@ -19,6 +21,7 @@ import TextInputField from "../../../theme/components/form/TextInputField";
 import TableCard from "../../../theme/components/tables/TableCard";
 
 const ServiceRequest = () => {
+  const auth = useSelector((state) => state.auth.value.user);
   const initialState = {
     id: 0,
     loan_id: 0,
@@ -232,7 +235,7 @@ const ServiceRequest = () => {
             const services = res[1].data.data;
 
             setServiceCategories(categories);
-            setServices(services);
+            setServices(services.filter((serv) => serv.user_id == auth.id));
           })
         )
         .catch((err) => {

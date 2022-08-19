@@ -46,6 +46,10 @@ const Secretariate = lazy(() =>
 const Decision = lazy(() => import("../views/modules/requests/Decision"));
 const Imports = lazy(() => import("../views/modules/console/Imports"));
 const Profile = lazy(() => import("../views/modules/members/Profile"));
+const ServiceRequest = lazy(() =>
+  import("../views/modules/services/ServiceRequest")
+);
+const PasswordReset = lazy(() => import("../views/auth/PasswordReset"));
 
 export const pages = {
   guests: [
@@ -53,6 +57,13 @@ export const pages = {
       name: "Login",
       component: <Login />,
       path: "/login",
+    },
+  ],
+  resets: [
+    {
+      name: "Reset Password",
+      component: <PasswordReset />,
+      path: "/reset-password",
     },
   ],
   protected: [
@@ -175,6 +186,11 @@ export const pages = {
       name: "Member Profile",
       component: <Profile />,
       path: "/member/profile",
+    },
+    {
+      name: "Member Profile",
+      component: <ServiceRequest />,
+      path: "/service/requests",
     },
   ],
 };

@@ -3,10 +3,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Alert from "../services/helpers/classes/Alert";
 import { money } from "../services/helpers/functions";
 import { batchRequests, collection } from "../services/requests/controllers";
 import AuthDashboardCard from "./dashboards/AuthDashboardCard";
 import "./modules/requests/loan.css";
+import "../App.css";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth.value.user);
@@ -25,6 +27,20 @@ const Dashboard = () => {
   };
 
   const [state, setState] = useState(initialState);
+
+  const onBoardMembers = () => {
+    try {
+      collection("onboard/members")
+        .then((res) => {
+          const result = res.data;
+          console.log(result.data);
+          Alert.success("Mail Sent!!", result.message);
+        })
+        .catch((err) => console.log(err.message));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (auth !== null) {
@@ -100,6 +116,14 @@ const Dashboard = () => {
   return (
     <>
       <div className="row mb-5">
+        <div className="col-md-12 mb-3">
+          <h3 className="welcome-text">
+            Welcome,{" "}
+            <span className="header-text bg-success">
+              {auth?.firstname + " " + auth?.surname}
+            </span>
+          </h3>
+        </div>
         <div className="col-md-4">
           <div className="loan-card bg-success">
             <div className="card-body">
@@ -108,6 +132,17 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        {auth.roleLabels.includes("super-administrator") && (
+          <div className="col-md-8">
+            <button
+              type="button"
+              className="btn btn-success btn-block btn-sm btn-rounded"
+              onClick={() => onBoardMembers()}
+            >
+              Onboard Members
+            </button>
+          </div>
+        )}
       </div>
       <AuthDashboardCard auth={auth} cardValues={state} />
     </>

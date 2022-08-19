@@ -1,13 +1,13 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
-import moment from "moment";
+// import moment from "moment";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateLoggedInAuth } from "../../../features/auth/userSlice";
 import Alert from "../../../services/helpers/classes/Alert";
-import { money } from "../../../services/helpers/functions";
+// import { money } from "../../../services/helpers/functions";
 import { alter, store } from "../../../services/requests/controllers";
 import TextInputField from "../../../theme/components/form/TextInputField";
 import "./member-style.css";
@@ -19,6 +19,7 @@ const Profile = () => {
     surname: "",
     staff_no: "",
     email: "",
+    oldPassword: "",
     password: "",
     confirmPassword: "",
     designation: "",
@@ -34,7 +35,7 @@ const Profile = () => {
   const links = [
     { key: "profile", label: "Profile", active: true },
     { key: "account", label: "Account", active: false },
-    { key: "contribution", label: "Contribution", active: false },
+    // { key: "contribution", label: "Contribution", active: false },
     { key: "security", label: "Security", active: false },
   ];
 
@@ -155,53 +156,76 @@ const Profile = () => {
     }
   };
 
-  const handleContributionUpdate = (e) => {
-    e.preventDefault();
+  // const handleContributionUpdate = (e) => {
+  //   e.preventDefault();
 
-    const body = {
-      user_id: auth?.id,
-      fee: state.contribution_fee,
-      month: moment().format("MMMM"),
-    };
+  //   const body = {
+  //     user_id: auth?.id,
+  //     fee: state.contribution_fee,
+  //     month: moment().format("MMMM"),
+  //   };
 
-    setLoading(true);
+  //   setLoading(true);
 
-    try {
-      store("contributions", body)
-        .then((res) => {
-          const result = res.data;
-          dispatch(updateLoggedInAuth(result));
-          setLoading(false);
-          Alert.success("Contribution Updated!!", result.message);
-        })
-        .catch((err) => {
-          console.log(err.message);
-          setLoading(false);
-          Alert.error("Oops!!", "Something went wrong!!");
-        });
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+  //   try {
+  //     store("contributions", body)
+  //       .then((res) => {
+  //         const result = res.data;
+  //         dispatch(updateLoggedInAuth(result));
+  //         setLoading(false);
+  //         Alert.success("Contribution Updated!!", result.message);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.message);
+  //         setLoading(false);
+  //         Alert.error("Oops!!", "Something went wrong!!");
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
 
-    setState({
-      ...state,
-      contribution_fee: 0,
-    });
+  //   setState({
+  //     ...state,
+  //     contribution_fee: 0,
+  //   });
 
-    // console.log(body);
-  };
+  //   // console.log(body);
+  // };
 
   const passwordReset = (e) => {
     e.preventDefault();
 
     const body = {
       user_id: auth?.id,
+      oldPassword: state.oldPassword,
       password: state.password,
       confirmPassword: state.confirmPassword,
     };
 
-    console.log(body);
+    if (body.password === body.confirmPassword) {
+      try {
+        alter("password/reset", auth?.id, body)
+          .then((res) => {
+            const result = res.data;
+            Alert.success("Password Updated!!", result.message);
+            setState({
+              ...state,
+              oldPassword: "",
+              password: "",
+              confirmPassword: "",
+            });
+          })
+          .catch((err) => {
+            Alert.error("Oops!!", err.response.data.message);
+            console.log(err.response);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.error("Password Mismatch!!", "The new passwords do not match!");
+    }
   };
 
   useEffect(() => {
@@ -445,7 +469,7 @@ const Profile = () => {
         )}
 
         {/* Contribution Tab Content Area */}
-        {state.tabIndex === "contribution" && (
+        {/* {state.tabIndex === "contribution" && (
           <div className="col-md-12">
             <div className="card">
               <div className="card-body">
@@ -512,7 +536,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Secutiry Tab Content Area */}
         {state.tabIndex === "security" && (
@@ -521,9 +545,22 @@ const Profile = () => {
               <div className="card-body">
                 <form onSubmit={passwordReset}>
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <TextInputField
-                        label="Password"
+                        label="Current Password"
+                        type="password"
+                        size="lg"
+                        value={state.oldPassword}
+                        onChange={(e) =>
+                          setState({ ...state, oldPassword: e.target.value })
+                        }
+                        id="old-password"
+                        required
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <TextInputField
+                        label="New Password"
                         type="password"
                         size="lg"
                         value={state.password}
@@ -534,9 +571,9 @@ const Profile = () => {
                         required
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <TextInputField
-                        label="Confirm Password"
+                        label="Confirm New Password"
                         type="password"
                         size="lg"
                         value={state.confirmPassword}
