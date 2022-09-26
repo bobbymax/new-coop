@@ -241,11 +241,15 @@ const BudgetHeads = () => {
                           disabled
                         />
 
-                        {["Capital", "Recursive", "Personnel"].map((typ, i) => (
+                        {[
+                          { key: "capital", label: "Capital" },
+                          { key: "recursive", label: "Recurrent" },
+                          { key: "personnel", label: "Personnel" },
+                        ].map((typ, i) => (
                           <CustomSelectOptions
                             key={i}
-                            label={typ}
-                            value={typ.toLowerCase()}
+                            label={typ?.label}
+                            value={typ?.key}
                           />
                         ))}
                       </CustomSelect>
