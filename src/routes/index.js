@@ -50,6 +50,7 @@ const ServiceRequest = lazy(() =>
   import("../views/modules/services/ServiceRequest")
 );
 const PasswordReset = lazy(() => import("../views/auth/PasswordReset"));
+const ApplyLoan = lazy(() => import("../views/modules/loans/ApplyLoan"));
 
 export const pages = {
   guests: [
@@ -191,6 +192,11 @@ export const pages = {
       name: "Member Profile",
       component: <ServiceRequest />,
       path: "/service/requests",
+    },
+    {
+      name: "Apply Loans",
+      component: <ApplyLoan />,
+      path: "/apply/loans",
     },
   ],
 };

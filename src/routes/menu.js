@@ -55,6 +55,14 @@ export const navigation = [
         roles: ["secretariate", "super-administrator"],
       },
       {
+        title: "Apply Loans",
+        path: "/apply/loans",
+        icon: "mdi-alarm-light",
+        type: "link",
+        children: [],
+        roles: ["secretariate", "general-secretary", "super-administrator"],
+      },
+      {
         title: "Approve Loans",
         path: "/approve/loans",
         icon: "mdi-animation",
