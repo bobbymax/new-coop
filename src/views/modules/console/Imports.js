@@ -25,6 +25,7 @@ const Imports = () => {
     { value: "sub-budget-heads", label: "Sub Budget Heads" },
     { value: "grade-levels", label: "Grade Levels" },
     { value: "roles", label: "Roles" },
+    { value: "update-contributions", label: "Update Contributions" },
   ];
 
   const [state, setState] = useState(initialState);
