@@ -109,7 +109,7 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
                       </h4>
                       {card.format === "currency" && (
                         <span className="updated bg-success">
-                          as at August, 2021
+                          as at October, 2022
                         </span>
                       )}
                     </div>
