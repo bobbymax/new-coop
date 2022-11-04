@@ -31,7 +31,7 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
     },
     {
       title: "Current Loan",
-      figure: 0,
+      figure: currentLoan,
       format: "currency",
       roles: ["member", "super-administrator"],
     },
@@ -79,7 +79,7 @@ const AuthDashboardCard = ({ auth, cardValues }) => {
     },
     {
       title: "Total Outstanding",
-      figure: 0,
+      figure: totalOutstanding,
       format: "currency",
       roles: [
         "general-secretary",

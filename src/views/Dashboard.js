@@ -97,12 +97,12 @@ const Dashboard = () => {
               ...state,
               eligibility: parseFloat(eligibility),
               availableBalance: parseFloat(auth?.wallet?.current),
-              currentContribution: parseFloat(
-                parseFloat(auth?.contribution?.fee)
-              ),
+              currentContribution: parseFloat(auth?.contribution?.fee),
+              currentLoan: parseFloat(auth?.running_loan_amount),
               registeredMembers: validRegisteredMemebers.length,
               totalMembersContributions: contributionSum,
               totalAllTimeContribution: walletsSum,
+              totalOutstanding: parseFloat(auth?.total_outstanding),
               budgetAllocation: fundSum,
             });
           })
@@ -112,6 +112,8 @@ const Dashboard = () => {
       }
     }
   }, [auth]);
+
+  console.log(auth);
 
   return (
     <>
