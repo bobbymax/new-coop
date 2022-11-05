@@ -50,8 +50,14 @@ const Dashboard = () => {
         const fundsData = collection("funds");
         const walletsData = collection("wallets");
 
-        const eligibility =
-          auth?.activeLoans == 0 ? parseFloat(auth?.wallet?.current) * 2 : 0;
+        const runningLoan = parseFloat(auth?.running_loan_amount);
+        const wallet = parseFloat(auth?.wallet?.current);
+
+        let getEligibilityFigure = wallet * 2 - runningLoan;
+
+        const eligibility = getEligibilityFigure > 0 ? getEligibilityFigure : 0;
+
+        // if running_loan_amount > 0 => multiply current by 2 => subtract running_loan_amount from elibility => if < 0 set not eligible else set eligibility to result
 
         batchRequests([
           contributionData,
