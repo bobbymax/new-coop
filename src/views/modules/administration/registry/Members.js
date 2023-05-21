@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection } from "../../../../services/requests/controllers";
+import useCollection from "../../../../app/Hooks/useCollection";
 import TableCard from "../../../../theme/components/tables/TableCard";
 
 const Members = () => {
   const [members, setMembers] = useState([]);
 
   const navigate = useNavigate();
+
+  const params = {
+    url: "members",
+    uris: [],
+  };
+
+  const data = useCollection(params);
 
   const columns = [
     { key: "membership_no", label: "Membership Number" },
@@ -25,20 +32,12 @@ const Members = () => {
   };
 
   useEffect(() => {
-    try {
-      collection("members")
-        .then((res) => {
-          const data = res.data.data;
+    const { collections, error } = data;
 
-          setMembers(data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    } catch (error) {
-      console.log(error);
+    if (error === "") {
+      setMembers(collections);
     }
-  }, []);
+  }, [data]);
 
   return (
     <>

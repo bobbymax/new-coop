@@ -51,6 +51,13 @@ const ServiceRequest = lazy(() =>
 );
 const PasswordReset = lazy(() => import("../views/auth/PasswordReset"));
 const ApplyLoan = lazy(() => import("../views/modules/loans/ApplyLoan"));
+const Journals = lazy(() => import("../views/modules/records/Journals"));
+const SettledLoans = lazy(() =>
+  import("../views/modules/requests/SettledLoans")
+);
+const PaymentExport = lazy(() =>
+  import("../views/modules/exports/PaymentExport")
+);
 
 export const pages = {
   guests: [
@@ -124,6 +131,11 @@ export const pages = {
       path: "/chart-of-accounts",
     },
     {
+      name: "Journals",
+      component: <Journals />,
+      path: "/journals",
+    },
+    {
       name: "Deductions",
       component: <Deductions />,
       path: "/contribution/deductions",
@@ -144,9 +156,19 @@ export const pages = {
       path: "/loans/:id/calculate",
     },
     {
+      name: "Approved Loans",
+      component: <SettledLoans />,
+      path: "/approved/loans",
+    },
+    {
       name: "Grant Loans",
       component: <GrantLoans />,
       path: "/grant-loans",
+    },
+    {
+      name: "Payments Export",
+      component: <PaymentExport />,
+      path: "/export/payment/mandate",
     },
     {
       name: "Approve Loans",

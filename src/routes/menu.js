@@ -75,6 +75,14 @@ export const navigation = [
           "super-administrator",
         ],
       },
+      {
+        title: "Settled Loans",
+        path: "/approved/loans",
+        icon: "mdi-application",
+        type: "link",
+        children: [],
+        roles: ["account-officer", "super-administrator"],
+      },
     ],
     roles: [
       "secretariate",
@@ -181,6 +189,14 @@ export const navigation = [
           {
             title: "Chart Of Accounts",
             path: "/chart-of-accounts",
+            icon: "",
+            type: "sub-link",
+            children: [],
+            roles: ["super-administrator", "account-officer"],
+          },
+          {
+            title: "Jounals",
+            path: "/journals",
             icon: "",
             type: "sub-link",
             children: [],

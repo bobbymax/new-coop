@@ -91,7 +91,7 @@ const LoanRequest = () => {
     const d = new Date();
     const date = d.getDate();
     const month = d.getMonth();
-    const year = d.getFullYear();
+    let year = d.getFullYear();
 
     const spread = Math.ceil(count / 12);
     const months = getMonthsArr();
@@ -101,9 +101,12 @@ const LoanRequest = () => {
 
     for (let i = 0; i <= spread; i++) {
       const startPoints = i == 0 ? newMonths : months;
-      const newYear = year + i;
+      // const newYear = year + 1;
       startPoints.map((month, i) => {
-        const newDate = moment(newYear + "-" + month + "-" + 26).format("LL");
+        const newDate =
+          budget?.frequency === "annually"
+            ? moment(year + "-" + 1 + "-" + 3).format("LL")
+            : moment(year + "-" + month + "-" + 26).format("LL");
         return newArr.push(newDate);
       });
     }
@@ -166,7 +169,7 @@ const LoanRequest = () => {
     }
   }, []);
 
-  // console.log(installments);
+  // console.log(installments, request, budget, getSlicedMonths(24));
 
   return (
     <>

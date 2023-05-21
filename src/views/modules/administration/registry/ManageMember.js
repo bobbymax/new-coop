@@ -1,22 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Alert from "../../../../services/helpers/classes/Alert";
 import { alter, fetch, store } from "../../../../services/requests/controllers";
 import BasicTable from "../../../../theme/components/tables/BasicTable";
 import AssignRoleToMember from "./modals/AssignRoleToMember";
 import ModifyMemberAccount from "./modals/ModifyMemberAccount";
 import ModifyMemberContribution from "./modals/ModifyMemberContribution";
+import ResetPassword from "./modals/ResetPassword";
 
 const ManageMember = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const modalControlState = {
     user_id: 0,
     addRoles: false,
     modify: false,
     contribution: false,
+    passwordReset: false,
   };
 
   const [member, setMember] = useState({});
@@ -100,6 +103,31 @@ const ManageMember = () => {
     }
   };
 
+  const handleClosePage = () => {
+    navigate("/members");
+  };
+
+  const handlePasswordReset = (password) => {
+    const data = {
+      user_id: member?.id,
+      password,
+    };
+
+    try {
+      store("reset/pass", data)
+        .then((res) => {
+          const response = res.data;
+
+          setMember(response.data);
+          Alert.success("Reset Complete!!", response.message);
+          handleClosePage();
+        })
+        .catch((err) => err.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (location.state && location.state.member) {
       const data = location.state.member;
@@ -125,6 +153,15 @@ const ManageMember = () => {
   return (
     <>
       <div className="row">
+        <div className="col-md-12 mb-4">
+          <button
+            type="button"
+            className="btn btn-rounded btn-primary"
+            onClick={() => handleClosePage()}
+          >
+            Close
+          </button>
+        </div>
         <div className="col-md-6">
           <div className="card">
             <div className="card-header">
@@ -216,7 +253,13 @@ const ManageMember = () => {
                 >
                   VERIFY MEMBER
                 </button>
-                <button type="button" className="btn btn-info btn-block">
+                <button
+                  type="button"
+                  className="btn btn-info btn-block"
+                  onClick={() =>
+                    setModalControl({ ...modalControl, passwordReset: true })
+                  }
+                >
                   RESET PASSWORD
                 </button>
                 <button
@@ -285,6 +328,14 @@ const ManageMember = () => {
         show={modalControl.contribution}
         onHide={() => setModalControl({ ...modalControl, contribution: false })}
         modifyContribution={modifyContribution}
+      />
+
+      <ResetPassword
+        show={modalControl.passwordReset}
+        onHide={() =>
+          setModalControl({ ...modalControl, passwordReset: false })
+        }
+        handlePasswordReset={handlePasswordReset}
       />
     </>
   );

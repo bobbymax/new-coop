@@ -57,6 +57,21 @@ const ServiceRequest = () => {
     { key: "status", label: "Status" },
   ];
 
+  const airports = [
+    { label: "Abuja", value: "abuja" },
+    { label: "Asaba", value: "asaba" },
+    { label: "Calabar", value: "calabar" },
+    { label: "Ibadan", value: "ibadan" },
+    { label: "Owerri", value: "owerri" },
+    { label: "Uyo", value: "uyo" },
+    { label: "Kano", value: "kano" },
+    { label: "Port Harcourt", value: "port-harcourt" },
+    { label: "Kaduna", value: "kaduna" },
+    { label: "Lagos", value: "lagos" },
+    { label: "Yenagoa", value: "yenagoa" },
+    { label: "Sokoto", value: "sokoto" },
+  ];
+
   const handleEdit = (data) => {
     setState({
       ...state,
@@ -356,28 +371,82 @@ const ServiceRequest = () => {
                           </CustomSelect>
                         </div>
                         <div className="col-md-4">
-                          <TextInputField
-                            label="FROM"
-                            placeholder="ENTER TAKE OFF STATE"
-                            value={state.takeOff}
-                            onChange={(e) =>
-                              setState({ ...state, takeOff: e.target.value })
-                            }
-                          />
+                          {state.type === "local" ? (
+                            <CustomSelect
+                              label="FROM"
+                              value={state.takeOff}
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  takeOff: e.target.value,
+                                })
+                              }
+                            >
+                              <CustomSelectOptions
+                                label="SELECT TAKE OFF"
+                                value=""
+                                disabled
+                              />
+
+                              {airports?.map((airt, i) => (
+                                <CustomSelectOptions
+                                  key={i}
+                                  value={airt.value}
+                                  label={airt.label?.toUpperCase()}
+                                />
+                              ))}
+                            </CustomSelect>
+                          ) : (
+                            <TextInputField
+                              label="FROM"
+                              placeholder="ENTER TAKE OFF STATE"
+                              value={state.takeOff}
+                              onChange={(e) =>
+                                setState({ ...state, takeOff: e.target.value })
+                              }
+                            />
+                          )}
                         </div>
 
                         <div className="col-md-4">
-                          <TextInputField
-                            label="TO"
-                            placeholder="ENTER DESTINATION"
-                            value={state.destination}
-                            onChange={(e) =>
-                              setState({
-                                ...state,
-                                destination: e.target.value,
-                              })
-                            }
-                          />
+                          {state.type === "local" ? (
+                            <CustomSelect
+                              label="TO"
+                              value={state.destination}
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  destination: e.target.value,
+                                })
+                              }
+                            >
+                              <CustomSelectOptions
+                                label="SELECT DESTINATION"
+                                value=""
+                                disabled
+                              />
+
+                              {airports?.map((airt, i) => (
+                                <CustomSelectOptions
+                                  key={i}
+                                  value={airt.value}
+                                  label={airt.label?.toUpperCase()}
+                                />
+                              ))}
+                            </CustomSelect>
+                          ) : (
+                            <TextInputField
+                              label="TO"
+                              placeholder="ENTER DESTINATION"
+                              value={state.destination}
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  destination: e.target.value,
+                                })
+                              }
+                            />
+                          )}
                         </div>
 
                         <div className="col-md-4">
